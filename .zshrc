@@ -52,6 +52,20 @@ export LC_ALL=en_US.UTF-8
         source ~/.local/neo4j/local
     fi
 
+# Python module help into vim
+function pyhelp {
+    if [ -z "$1" ]; then
+        echo "provide module name as arg"
+        return 0
+    else
+        # Pipe output of pythons help into vim with syntax
+        # highlighting.  It seems to work best abusing language
+        # files that do not match single quotations as strings.
+        python -c "import $1; print(help($1))" | \
+            vim -c 'set syntax=rust' -
+    fi
+}
+
 # zsh shell builtin 'time' formatting string TIMEFMT
 # see 'man zshparam'.  Note the manual says mem is
 # given in kB, but at this time is MB on linux, kB
