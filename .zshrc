@@ -61,8 +61,8 @@ function pyhelp {
         # Pipe output of pythons help into vim with syntax
         # highlighting.  It seems to work best abusing language
         # files that do not match single quotations as strings.
-        python -c "import $1; print(help($1))" | \
-            vim -c 'set syntax=rust' -
+        pydoc $1 | \
+            vim -c 'set syntax=rust' -c '%s/\s\+$//e' -
     fi
 }
 
